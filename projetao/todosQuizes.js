@@ -1,6 +1,8 @@
 const url='https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes'
-const gabarito=[]
-let contagem=0
+let gabarito=[]
+let acertos=0
+let niveis=[]
+let idQuiz=0
 function buscarQuizes(){
     const promessa= axios.get(url)
     promessa.then(separarListaObjetos)
@@ -17,7 +19,7 @@ function printarTodosQuizes(imagem,titulo,id){
     listaTodos.innerHTML+=`
     <li class="quiz" onclick="buscarQuizEspecifico('${id}')">
         <img src="${imagem}">
-        <p>${titulo}</p>
+        <div><p>${titulo}</p></div>
     </li>
     `
 }
@@ -31,8 +33,10 @@ function separarObjeto(resposta){
     const objeto=resposta.data
     console.log(objeto)
     printarQuiz(objeto.image,objeto.title,objeto.questions)
-    document.querySelector('.todosQuizes').classList.add('some')
+    document.querySelector('main').classList.add('some')
     document.querySelector('.quizEspecifico').classList.remove('some')
+    niveis=objeto.levels
+    idQuiz=objeto.id
 }
 
 function printarQuiz(imagem,titulo,perguntas){
@@ -48,17 +52,17 @@ function printarQuiz(imagem,titulo,perguntas){
     const listaPerguntas=document.querySelector('.listaPerguntas')
     for(let k=0;k<perguntas.length;k++){
         listaPerguntas.innerHTML+=`
-            <li class="divPergunta">
+            <li class="divPergunta perg${k}">
                 <div class="tituloPergunta">
                     <span>${perguntas[k].title}</span>
                 </div>
-                <div class="respostas perg${k}">
+                <div class="respostas">
             
                 </div>
             </li>
         `
         const listaRespostas=perguntas[k].answers.sort(()=>{return Math.random() - 0.5;})
-        const respostas=document.querySelector(`.perg${k}`)
+        const respostas=document.querySelector(`.perg${k} .respostas`)
         for(let i=0;i<listaRespostas.length;i++){
             respostas.innerHTML+=`
                 <div class="resposta perg${k}resp${i}" onclick="checarResposta(${k},${i},${listaRespostas.length})">
@@ -72,8 +76,9 @@ function printarQuiz(imagem,titulo,perguntas){
         }
     }
 }
+
 function checarResposta(iPergunta,iResposta,qtdRespostas){
-    if(iResposta==gabarito[iPergunta]){ contagem++ }
+    if(iResposta==gabarito[iPergunta]){ acertos++ }
     for(let j=0;j<qtdRespostas;j++){
         if(j!=iResposta){
             document.querySelector(`.perg${iPergunta}resp${j}`).classList.add('opacidade')
@@ -85,4 +90,42 @@ function checarResposta(iPergunta,iResposta,qtdRespostas){
             document.querySelector(`.perg${iPergunta}resp${j} p`).classList.add('verde')
         }
     }
+    const proximaPergunta=document.querySelector(`.perg${iPergunta+1}`)
+    if(proximaPergunta!=null){
+        setTimeout(()=>{proximaPergunta.scrollIntoView()},2000)
+    }else{printarResultado()}  
+}
+
+function printarResultado(){
+    const porcentagem=Math.round(acertos*100/gabarito.length)
+    let k=niveis.length-1
+    while(porcentagem<niveis[k].minValue){k--}
+    const objeto=niveis[k]
+    document.querySelector('.quizEspecifico').innerHTML+=`
+        <div class="divPergunta resultadoQuiz">
+            <div class="tituloPergunta">
+                <span>${porcentagem}% de acerto: ${objeto.title}</span>
+            </div>
+            <img src="${objeto.image}">
+            <p>${objeto.text}</p>
+        </div>
+        <button onclick="reiniciarQuiz()" class="reiniciarQuiz">Reiniciar Quizz</button>
+        <button onclick="voltarHome()" class="voltarHome">Voltar para home</button>
+    `
+    setTimeout(()=>{document.querySelector('.resultadoQuiz').scrollIntoView()},2000)
+}
+
+function reiniciarQuiz(){
+    gabarito=[]
+    acertos=0
+    niveis=[]
+    buscarQuizEspecifico(idQuiz)
+}
+function voltarHome(){
+    gabarito=[]
+    acertos=0
+    niveis=[]
+    idQuiz=0
+    document.querySelector('.quizEspecifico').classList.add('some')
+    document.querySelector('main').classList.remove('some')
 }
