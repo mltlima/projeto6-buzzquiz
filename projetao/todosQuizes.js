@@ -1,5 +1,6 @@
 const url='https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes'
-
+const gabarito=[]
+let contagem=0
 function buscarQuizes(){
     const promessa= axios.get(url)
     promessa.then(separarListaObjetos)
@@ -51,19 +52,37 @@ function printarQuiz(imagem,titulo,perguntas){
                 <div class="tituloPergunta">
                     <span>${perguntas[k].title}</span>
                 </div>
-                <div class="respostas resp${k}">
+                <div class="respostas perg${k}">
             
                 </div>
             </li>
         `
-        const respostas=document.querySelector(`.resp${k}`)
-        for(let i=0;i<perguntas[k].answers.length;i++)
+        const listaRespostas=perguntas[k].answers.sort(()=>{return Math.random() - 0.5;})
+        const respostas=document.querySelector(`.perg${k}`)
+        for(let i=0;i<listaRespostas.length;i++){
             respostas.innerHTML+=`
-                <div class="resposta">
-                    <img src="${perguntas[k].answers[i].image}">
-                    <p>${perguntas[k].answers[i].title}</p>
+                <div class="resposta perg${k}resp${i}" onclick="checarResposta(${k},${i},${listaRespostas.length})">
+                    <img src="${listaRespostas[i].image}">
+                    <p>${listaRespostas[i].title}</p>
                 </div>
             `
-
+            if(listaRespostas[i].isCorrectAnswer==true){
+                gabarito.push(i)
+            }
+        }
+    }
+}
+function checarResposta(iPergunta,iResposta,qtdRespostas){
+    if(iResposta==gabarito[iPergunta]){ contagem++ }
+    for(let j=0;j<qtdRespostas;j++){
+        if(j!=iResposta){
+            document.querySelector(`.perg${iPergunta}resp${j}`).classList.add('opacidade')
+        }
+        if(j!=gabarito[iPergunta]){
+            document.querySelector(`.perg${iPergunta}resp${j} p`).classList.add('vermelho')
+        }
+        if(j==gabarito[iPergunta]){
+            document.querySelector(`.perg${iPergunta}resp${j} p`).classList.add('verde')
+        }
     }
 }

@@ -154,6 +154,12 @@ h1{
 
 
 
-
+/* AUXILIARES */
 
 .some{display:none}
+
+.opacidade{opacity: 0.3;}
+
+.vermelho{color: #FF0B0B;}
+
+.verde{color: #009C22;}
