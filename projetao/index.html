@@ -23,7 +23,7 @@
     <main>
         <section class="nenhumQuizCriado">
             <span>Você não criou nenhum quizz ainda :(</span>
-            <button>Criar Quizz</button>
+            <button onclick="paginaCriacaoQuiz()">Criar Quizz</button>
         </section>
 
         <section class="meusQuizes">
@@ -39,6 +39,25 @@
             <ul>
                 
             </ul>
+        </section>
+
+        <section class="criacaoQuiz some">
+            <h1>Comece pelo começo</h1>
+            <div class="informacoesQuiz">
+                <input type="text" placeholder="Título do seu quizz">
+                <input type="text" placeholder="URL da imagem do seu quizz">
+                <input type="number" placeholder="Quantidade de perguntas do quizz">
+                <input type="number" placeholder="Quantidade de níveis do quizz">
+            </div>
+            <button onclick="criarQuiz()">Prosseguir para criar perguntas</button>
+        </section>
+
+        <section class="criacaoPerguntas some"> 
+            <h1>Crie suas perguntas</h1>
+            <div class="perguntas">
+
+            </div>
+            <button onclick="validarPerguntas()">Prosseguir para criar níveis</button>
         </section>
 
     </main>

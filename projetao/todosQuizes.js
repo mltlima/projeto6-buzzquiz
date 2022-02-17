@@ -3,6 +3,7 @@ let gabarito=[]
 let acertos=0
 let niveis=[]
 let idQuiz=0
+let informacoes = [];
 function buscarQuizes(){
     const promessa= axios.get(url)
     promessa.then(separarListaObjetos)
@@ -142,4 +143,90 @@ function voltarHome(){
     document.querySelector('.quizEspecifico').classList.add('some')
     document.querySelector('main').classList.remove('some')
     document.querySelector('main').scrollIntoView();
+}
+
+
+function paginaCriacaoQuiz() {
+    //Desabilita outras classes
+    document.querySelector('.todosQuizes').classList.add('some');
+    document.querySelector('.nenhumQuizCriado').classList.add('some');
+    document.querySelector('.meusQuizes').classList.add('some');
+    //Habilita a classe de criacaoQuiz
+    document.querySelector('.criacaoQuiz').classList.remove('some');
+}
+
+function criarQuiz() {
+    informacoes = document.querySelectorAll(".criacaoQuiz input");
+    let informacaoValida = true;
+
+    //Valida informacoes
+    informacaoValida = verificaURL(informacoes[1].value);
+    
+    if (informacoes[0].value.length < 20 || informacoes[0].value.length > 65) {
+        console.log(informacoes[0].value.length)
+        informacaoValida = false;
+    }
+    
+    
+    if (informacoes[2].value < 3) {
+        informacaoValida = false;
+    }
+    
+    if (informacoes[3].value < 2) {
+        informacaoValida = false;
+    }
+
+    if (!informacaoValida) {
+        alert("Por favor, preencha dos dados corretamente");
+        informacoes.forEach((info) => {
+            info.value = "";
+        })
+    }else {
+        criarPerguntas();
+    }
+}
+
+function criarPerguntas() {
+    document.querySelector(".criacaoQuiz").classList.add("some");
+    const criacaoPerguntasHTML = document.querySelector(".criacaoPerguntas");
+    criacaoPerguntasHTML.classList.remove("some");
+
+    for (let i = 1; i <= informacoes[2].value; i++) {
+
+        criacaoPerguntasHTML.querySelector(".perguntas").innerHTML += 
+        `
+        <section class="pergunta">
+            <h1>Pergunta ${i}</h1>
+            <input type="text" placeholder="Texto da pergunta">
+            <input type="text" placeholder="Cor de fundo da pergunta">
+            <h1>Resposta correta</h1>
+            <input type="text" placeholder="Resposta Correta">
+            <input type="text" placeholder="URL da imagem">
+            <h1>Respostas incorretas</h1>
+            <input type="text" placeholder="Resposta incorreta 1">
+            <input type="text" placeholder="URL da imagem 1">
+            <br>
+            <input type="text" placeholder="Resposta incorreta 2">
+            <input type="text" placeholder="URL da imagem 2">
+            <br>
+            <input type="text" placeholder="Resposta incorreta 3">
+            <input type="text" placeholder="URL da imagem 3">
+            <br>
+        </section>
+        `       
+    }
+
+
+}
+
+function verificaURL(string) {
+    let url;
+
+    try {
+        url = new URL(string);
+    } catch (_) {
+        return false;
+    }
+
+    return true;
 }
