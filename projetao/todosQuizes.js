@@ -19,7 +19,7 @@ function printarTodosQuizes(imagem,titulo,id){
     const listaTodos=document.querySelector('.todosQuizes ul')
     listaTodos.innerHTML+=`
     <li class="quiz" onclick="buscarQuizEspecifico('${id}')">
-        <img src="${imagem}">
+        <img style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%), url(${imagem})">
         <div><p>${titulo}</p></div>
     </li>
     `
@@ -32,7 +32,7 @@ function buscarQuizEspecifico(id){
 
 function separarObjeto(resposta){
     const objeto=resposta.data
-    console.log(objeto)
+    console.log(objeto) // RETIRAR DEPOIS 
     printarQuiz(objeto.image,objeto.title,objeto.questions)
     document.querySelector('main').classList.add('some')
     document.querySelector('.quizEspecifico').classList.remove('some')
@@ -46,6 +46,7 @@ function printarQuiz(imagem,titulo,perguntas){
         <div class="imagemTitulo">
             <img src="${imagem}">
             <p>${titulo}</p>
+            <div class="escurecedor"></div>
         </div>
         <ul class="listaPerguntas">
         </ul>
@@ -54,11 +55,12 @@ function printarQuiz(imagem,titulo,perguntas){
     for(let k=0;k<perguntas.length;k++){
         listaPerguntas.innerHTML+=`
             <li class="divPergunta perg${k}">
-                <div class="tituloPergunta">
+                <div class="impedidorDeClique imp${k} some"></div>
+                <div style="background-color:${perguntas[k].color}" class="tituloPergunta">
                     <span>${perguntas[k].title}</span>
                 </div>
                 <div class="respostas">
-            
+                
                 </div>
             </li>
         `
@@ -91,16 +93,26 @@ function checarResposta(iPergunta,iResposta,qtdRespostas){
             document.querySelector(`.perg${iPergunta}resp${j} p`).classList.add('verde')
         }
     }
+    document.querySelector(`.imp${iPergunta}`).classList.remove('some')
     const proximaPergunta=document.querySelector(`.perg${iPergunta+1}`)
-    if(proximaPergunta!=null){
+    const perguntaNaoRespondida=document.querySelector('.impedidorDeClique.some')
+    if(proximaPergunta!=null && perguntaNaoRespondida!=null){
         setTimeout(()=>{proximaPergunta.scrollIntoView()},2000)
-    }else{printarResultado()}  
+    }else{checarSeTodasForamRespondidas(perguntaNaoRespondida)}  
+}
+
+function checarSeTodasForamRespondidas(perguntaNaoRespondida){
+    if(perguntaNaoRespondida!=null){
+        perguntaNaoRespondida.scrollIntoView()
+    }else{
+        printarResultado()
+    }
 }
 
 function printarResultado(){
     const porcentagem=Math.round(acertos*100/gabarito.length)
     let k=niveis.length-1
-    while(porcentagem<niveis[k].minValue){k--}
+    while(porcentagem<parseInt(niveis[k].minValue)){k--}
     const objeto=niveis[k]
     document.querySelector('.quizEspecifico').innerHTML+=`
         <div class="divPergunta resultadoQuiz">
@@ -121,6 +133,7 @@ function reiniciarQuiz(){
     acertos=0
     niveis=[]
     buscarQuizEspecifico(idQuiz)
+    document.querySelector('.imagemTitulo').scrollIntoView()
 }
 function voltarHome(){
     gabarito=[]
@@ -129,6 +142,7 @@ function voltarHome(){
     idQuiz=0
     document.querySelector('.quizEspecifico').classList.add('some')
     document.querySelector('main').classList.remove('some')
+    document.querySelector('main').scrollIntoView();
 }
 
 
