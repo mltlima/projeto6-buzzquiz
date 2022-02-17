@@ -201,17 +201,17 @@ h1{
 
 /* Criacao do quiz */
 
-.criacaoQuiz, .criacaoPerguntas{
+.criacaoQuiz, .criacaoPerguntas, .criacaoNiveis{
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.criacaoQuiz h1, .criacaoPerguntas > h1:first-of-type {
+.criacaoQuiz h1, .criacaoPerguntas > h1:first-of-type, .criacaoNiveis > h1:first-of-type {
     display:inline;
     width:100%;
     text-align:center;
  }
- .criacaoQuiz button,.criacaoPerguntas button {
+ .criacaoQuiz button,.criacaoPerguntas button, .criacaoNiveis button {
      box-sizing: content-box;
      height: 54px;
      width: 324px;
@@ -227,7 +227,7 @@ h1{
      text-align: center;
      color: white;
  }
-.informacoesQuiz, .pergunta {
+.informacoesQuiz, .pergunta, .nivel {
     max-width: 600px;
     margin-top: 29px;
     display: flex;
@@ -236,14 +236,14 @@ h1{
     background-color: white;
     padding: 18px;
 }
-.informacoesQuiz input, .perguntas input {
+.informacoesQuiz input, .perguntas input, .niveis input {
     border: 1px solid #d1d1d1;
     border-radius: 5px;
     color: #8d8c8c;
     height: 46px;
     margin-top: 9px ;
 }
-.informacoesQuiz input::placeholder, .perguntas input::placeholder {
+.informacoesQuiz input::placeholder, .perguntas input::placeholder, .niveis input::placeholder {
     font-style: italic;
     font-weight: normal;
     font-size: 19px;
@@ -252,6 +252,13 @@ h1{
 }
 .perguntas h1 {
     margin:25px 0px 25px;
+}
+.descricaoNivel {
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+    color: #8d8c8c;
+    height: 340px;
+    margin-top: 9px ;
 }
 
 

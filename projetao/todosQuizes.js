@@ -235,7 +235,6 @@ function validarPerguntas() {
         for (let i = 0; i < 3; i++) {
             if (!(respostasIncorretas[i].value == null) && verificaURL(urlRespostasIncorretas[i].value)) {
                 haRespostaIncorreta = true;
-                console.log("aqui resposta incorreta preenchida corretamente")
             }
         }
         
@@ -245,7 +244,48 @@ function validarPerguntas() {
     if (!informacaoValida) {
         alert("Por favor, preencha dos dados corretamente");
     }else {
-        criarPerguntas();
+        criarNiveis();
+    }
+}
+
+function criarNiveis() {
+    document.querySelector(".criacaoPerguntas").classList.add("some");
+    const criacaoNiveisHTML = document.querySelector(".criacaoNiveis");
+    criacaoNiveisHTML.classList.remove("some");
+
+    for (let i = 1; i <= informacoes[3].value; i++) {
+
+        criacaoNiveisHTML.querySelector(".niveis").innerHTML += 
+        `
+        <section class="nivel">
+            <h1>Nível ${i}</h1>
+            <input class="tituloNivel" type="text" placeholder="Título do nível">
+            <input class="porcentagemAcerto" type="number" placeholder="% de acerto mínima">
+            <input class="urlImagemNivel" type="text" placeholder="URL da imagem do nível">
+            <input class="descricaoNivel" type="text" placeholder="Descrição do nível">
+        </section>
+        `   
+    }
+}
+
+function validarNiveis() {
+    let informacaoValida = true;
+    let nivelSem0 = true;
+    const regex = /^#(?:[0-9a-fA-F]{3}){1,2}$/
+
+    document.querySelectorAll(".nivel").forEach((nivel) => {
+        if (nivel.querySelector(".tituloNivel").value.length < 10) {informacaoValida = false};
+        if (nivel.querySelector(".porcentagemAcerto").value < 0 || nivel.querySelector(".porcentagemAcerto").value > 100) {informacaoValida = false};
+        if (nivel.querySelector(".porcentagemAcerto").value == 0) {nivelSem0 =  false};
+        if (!regex.test(nivel.querySelector(".urlImagemNivel").value)) {informacaoValida = false};
+        if (nivel.querySelector(".descricaoNivel").value.length < 30) {informacaoValida = false};
+    })
+
+    if (!informacaoValida || nivelSem0) {
+        alert("Por favor, preencha dos dados corretamente");
+    }else {
+        console.log("Sucesso");
+        //criarNiveis();
     }
 }
 
