@@ -129,3 +129,60 @@ function voltarHome(){
     document.querySelector('.quizEspecifico').classList.add('some')
     document.querySelector('main').classList.remove('some')
 }
+
+
+function paginaCriacaoQuiz() {
+    //Desabilita outras classes
+    document.querySelector('.todosQuizes').classList.add('some');
+    document.querySelector('.nenhumQuizCriado').classList.add('some');
+    document.querySelector('.meusQuizes').classList.add('some');
+    //Habilita a classe de criacaoQuiz
+    document.querySelector('.criacaoQuiz').classList.remove('some');
+}
+
+function criarQuiz() {
+    const informacoes = document.querySelectorAll(".criacaoQuiz input");
+    let informacaoValida = true;
+
+    //Valida informacoes
+    informacaoValida = verificaURL(informacoes[1].value);
+    
+    if (informacoes[0].value.length < 20 || informacoes[0].value.length > 65) {
+        console.log(informacoes[0].value.length)
+        informacaoValida = false;
+    }
+    
+    
+    if (informacoes[2].value < 3) {
+        informacaoValida = false;
+    }
+    
+    if (informacoes[3].value < 2) {
+        informacaoValida = false;
+    }
+
+    if (!informacaoValida) {
+        alert("Por favor, preencha dos dados corretamente");
+        informacoes.forEach((info) => {
+            info.value = "";
+        })
+    }else {
+        criarPerguntas();
+    }
+}
+
+function criarPerguntas() {
+    
+}
+
+function verificaURL(string) {
+    let url;
+
+    try {
+        url = new URL(string);
+    } catch (_) {
+        return false;
+    }
+
+    return true;
+}

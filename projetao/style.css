@@ -185,6 +185,70 @@ h1{
     margin-bottom:66px
 }
 
+/* Criacao do quiz */
+
+.criacaoQuiz{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.informacoesQuiz {
+    max-width: 600px;
+    margin-top: 29px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    padding: 18px;
+}
+.criacaoQuiz h1 {
+    display:inline;
+    width:100%;
+    text-align:center;
+ }
+.informacoesQuiz input {
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+    color: #8d8c8c;
+    height: 46px;
+    margin-top: 9px ;
+}
+.informacoesQuiz input::placeholder {
+    font-style: italic;
+    font-weight: normal;
+    font-size: 19px;
+    line-height: 22px;
+    color: #bababa;
+}
+.criacaoQuiz button {
+    box-sizing: content-box;
+    height: 54px;
+    width: 324px;
+    margin-top: 29px;
+    border-radius: 15px;
+    background-color: #EC362D;
+    border: 1px dashed #ec362d;
+
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: center;
+    color: white;
+}
+.criacaoPerguntas h1 {
+    display:inline;
+    width:100%;
+    text-align:center;
+ }
+.criacaoPerguntas {
+    max-width: 600px;
+    margin-top: 29px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    padding: 18px;
+}
 
 
 /* AUXILIARES */
