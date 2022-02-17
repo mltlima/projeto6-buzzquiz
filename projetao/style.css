@@ -48,19 +48,20 @@ h1{
 .quiz img{
     height: 181px;
     width: 100%;
-    
+    border-radius: 5px;
 }
 .quiz{
     position: relative;
     width: 340px;
     margin-top: 10px;
 }
-
-.quiz p{
+.quiz div{
     width: 300px;
     position: absolute;
-    margin-left: 20px;margin-right: 20px;
-    bottom:10px;
+    bottom:10px;left:20px
+}
+.quiz p{
+    width: 300px;
     color: white;
 }
 
@@ -104,15 +105,18 @@ h1{
 /* QUIZ ESPECIFICO */
 .divPergunta{
     width: 375px;
-    height: 436px;
     background-color: white;
     display: flex;flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
+    margin-bottom:24px
 }
 .imagemTitulo{
     width: 375px;
     position: relative;
+    margin-bottom:24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .imagemTitulo img{
     height: 181px;
@@ -120,13 +124,13 @@ h1{
 }
 .imagemTitulo p{
     position: absolute;
-    color: white;
-    bottom:50%; 
+    color: white; 
 }
 .tituloPergunta{
     width: 340px;height: 90px;
     background-color: #434CA0;
     display: flex;justify-content: center;align-items: center;
+    margin-top:20px;
 }
 .tituloPergunta span{
     font-weight: 700;
@@ -149,11 +153,46 @@ h1{
 .resposta p{
     font-weight: 700;
     margin-top:5px;
+    margin-bottom:20px;
+}
+.resultadoQuiz img{
+    width: 340px;
+    height: 255px;
+    margin-top:10px;
+    margin-bottom:10px
+}
+.resultadoQuiz p{
+    width: 340px;
+    font-weight: 700;
+    color: #484848;
+    margin-bottom:10px
+}
+.quizEspecifico button{
+    width: 220px; 
+    height: 44px;
+    border-radius: 15px;
+    border:0;
+    font-size: 20px
+}
+.reiniciarQuiz{
+    background-color: #EC362D;
+    color:white;
+    margin:15px
+}
+.voltarHome{
+    background-color: #FAFAFA;
+    color:#818181;
+    margin-bottom:66px
 }
 
 
 
-
-
+/* AUXILIARES */
 
 .some{display:none}
+
+.opacidade{opacity: 0.3;}
+
+.vermelho{color: #FF0B0B;}
+
+.verde{color: #009C22;}
