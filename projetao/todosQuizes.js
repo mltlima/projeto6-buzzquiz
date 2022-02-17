@@ -149,7 +149,6 @@ function criarQuiz() {
     informacaoValida = verificaURL(informacoes[1].value);
     
     if (informacoes[0].value.length < 20 || informacoes[0].value.length > 65) {
-        console.log(informacoes[0].value.length)
         informacaoValida = false;
     }
     
@@ -183,26 +182,57 @@ function criarPerguntas() {
         `
         <section class="pergunta">
             <h1>Pergunta ${i}</h1>
-            <input type="text" placeholder="Texto da pergunta">
-            <input type="text" placeholder="Cor de fundo da pergunta">
+            <input class="textoPergunta" type="text" placeholder="Texto da pergunta">
+            <input class="corPergunta" type="text" placeholder="Cor de fundo da pergunta">
             <h1>Resposta correta</h1>
-            <input type="text" placeholder="Resposta Correta">
-            <input type="text" placeholder="URL da imagem">
+            <input class="respostaCorreta" type="text" placeholder="Resposta Correta">
+            <input class="urlImagemRespostaCorreta" type="text" placeholder="URL da imagem">
             <h1>Respostas incorretas</h1>
-            <input type="text" placeholder="Resposta incorreta 1">
-            <input type="text" placeholder="URL da imagem 1">
+            <input class="respostaIncorreta" type="text" placeholder="Resposta incorreta 1">
+            <input class="urlImagemRespostaIncorreta" type="text" placeholder="URL da imagem 1">
             <br>
-            <input type="text" placeholder="Resposta incorreta 2">
-            <input type="text" placeholder="URL da imagem 2">
+            <input class="respostaIncorreta" type="text" placeholder="Resposta incorreta 2">
+            <input class="urlImagemRespostaIncorreta" type="text" placeholder="URL da imagem 2">
             <br>
-            <input type="text" placeholder="Resposta incorreta 3">
-            <input type="text" placeholder="URL da imagem 3">
+            <input class="respostaIncorreta" type="text" placeholder="Resposta incorreta 3">
+            <input class="urlImagemRespostaIncorreta" type="text" placeholder="URL da imagem 3">
             <br>
         </section>
         `       
     }
 
 
+}
+
+function validarPerguntas() {
+    let informacaoValida = true;
+    let haRespostaIncorreta = false;
+    //let haUrlRespostaIncorreta = false;
+    const regex = /^#(?:[0-9a-fA-F]{3}){1,2}$/
+
+    document.querySelectorAll(".pergunta").forEach((pergunta) => {
+        if (pergunta.querySelector(".textoPergunta").value.length < 20) {informacaoValida = false};
+        if (!regex.test(pergunta.querySelector(".corPergunta").value)) {informacaoValida = false};
+        if (pergunta.querySelector(".respostaCorreta").value == null) {informacaoValida = false};
+        if (!verificaURL(pergunta.querySelector(".urlImagemRespostaCorreta").value)) {informacaoValida = false};
+        
+        let respostasIncorretas = pergunta.querySelectorAll(".respostaIncorreta")
+        let urlRespostasIncorretas = pergunta.querySelectorAll(".urlImagemRespostaIncorreta")
+        for (let i = 0; i < 3; i++) {
+            if (!(respostasIncorretas[i].value == null) && verificaURL(urlRespostasIncorretas[i].value)) {
+                haRespostaIncorreta = true;
+                console.log("aqui resposta incorreta preenchida corretamente")
+            }
+        }
+        
+        if (!haRespostaIncorreta) {informacaoValida = false};
+    })
+
+    if (!informacaoValida) {
+        alert("Por favor, preencha dos dados corretamente");
+    }else {
+        criarPerguntas();
+    }
 }
 
 function verificaURL(string) {
