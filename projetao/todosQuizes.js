@@ -3,6 +3,7 @@ let gabarito=[]
 let acertos=0
 let niveis=[]
 let idQuiz=0
+let informacoes = [];
 function buscarQuizes(){
     const promessa= axios.get(url)
     promessa.then(separarListaObjetos)
@@ -141,7 +142,7 @@ function paginaCriacaoQuiz() {
 }
 
 function criarQuiz() {
-    const informacoes = document.querySelectorAll(".criacaoQuiz input");
+    informacoes = document.querySelectorAll(".criacaoQuiz input");
     let informacaoValida = true;
 
     //Valida informacoes
@@ -172,7 +173,36 @@ function criarQuiz() {
 }
 
 function criarPerguntas() {
-    
+    document.querySelector(".criacaoQuiz").classList.add("some");
+    const criacaoPerguntasHTML = document.querySelector(".criacaoPerguntas");
+    criacaoPerguntasHTML.classList.remove("some");
+
+    for (let i = 1; i <= informacoes[2].value; i++) {
+
+        criacaoPerguntasHTML.querySelector(".perguntas").innerHTML += 
+        `
+        <section class="pergunta">
+            <h1>Pergunta ${i}</h1>
+            <input type="text" placeholder="Texto da pergunta">
+            <input type="text" placeholder="Cor de fundo da pergunta">
+            <h1>Resposta correta</h1>
+            <input type="text" placeholder="Resposta Correta">
+            <input type="text" placeholder="URL da imagem">
+            <h1>Respostas incorretas</h1>
+            <input type="text" placeholder="Resposta incorreta 1">
+            <input type="text" placeholder="URL da imagem 1">
+            <br>
+            <input type="text" placeholder="Resposta incorreta 2">
+            <input type="text" placeholder="URL da imagem 2">
+            <br>
+            <input type="text" placeholder="Resposta incorreta 3">
+            <input type="text" placeholder="URL da imagem 3">
+            <br>
+        </section>
+        `       
+    }
+
+
 }
 
 function verificaURL(string) {
