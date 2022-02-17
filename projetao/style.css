@@ -1,0 +1,159 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #FAFAFA;
+    font-size: 20px;
+    box-sizing: border-box;
+}
+header{
+    width: 100%;
+    height: 69px;
+    background-color: #EF5533;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: fixed;top:0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+header span{
+    color: white;
+    font-size: 37px;
+    font-weight: 700px;
+}
+main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:69px;
+}
+section{
+    width: 340px;
+    margin-top:34px
+    
+}
+article{
+    margin-top:69px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    color: black;
+    font-weight: 700;
+}
+
+/* FORMATO CAPA QUIZ */
+
+.quiz img{
+    height: 181px;
+    width: 100%;
+    
+}
+.quiz{
+    position: relative;
+    width: 340px;
+    margin-top: 10px;
+}
+
+.quiz p{
+    width: 300px;
+    position: absolute;
+    margin-left: 20px;margin-right: 20px;
+    bottom:10px;
+    color: white;
+}
+
+
+/* MEUS QUIZES */
+
+.meusQuizesBotaoCriar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.meusQuizesBotaoCriar ion-icon{
+    font-size: 20px;
+    background-color: #EF5533;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: #FAFAFA;
+}
+.nenhumQuizCriado{
+    border: 1px dashed #D5D5D5;
+    height: 181px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.nenhumQuizCriado span{
+    color: #B9B9B9;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.nenhumQuizCriado button{
+    background-color: #FAFAFA;
+    width: 151px;
+    height: 40px;
+    border: 1px dashed #EC362D;
+    border-radius: 50px;
+}
+
+/* QUIZ ESPECIFICO */
+.divPergunta{
+    width: 375px;
+    height: 436px;
+    background-color: white;
+    display: flex;flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.imagemTitulo{
+    width: 375px;
+    position: relative;
+}
+.imagemTitulo img{
+    height: 181px;
+    width: 100%;
+}
+.imagemTitulo p{
+    position: absolute;
+    color: white;
+    bottom:50%; 
+}
+.tituloPergunta{
+    width: 340px;height: 90px;
+    background-color: #434CA0;
+    display: flex;justify-content: center;align-items: center;
+}
+.tituloPergunta span{
+    font-weight: 700;
+    color: white;
+}
+.respostas{
+    width: 340px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.resposta{
+    width: 164px;
+}
+.resposta img{
+    height: 113px;
+    width: 100%;
+    margin-top:15px
+}
+.resposta p{
+    font-weight: 700;
+    margin-top:5px;
+}
+
+
+
+
+
+
+.some{display:none}
