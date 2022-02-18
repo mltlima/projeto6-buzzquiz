@@ -257,7 +257,7 @@ h1{
     border: 1px solid #d1d1d1;
     border-radius: 5px;
     color: #8d8c8c;
-    height: 340px;
+    height: 340px !important;
     margin-top: 9px ;
 }
 

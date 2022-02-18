@@ -4,6 +4,8 @@ let acertos=0
 let niveis=[]
 let idQuiz=0
 let informacoes = [];
+let perguntasGeradas = [];
+let niveisGerados = [];
 function buscarQuizes(){
     const promessa= axios.get(url)
     promessa.then(separarListaObjetos)
@@ -244,6 +246,7 @@ function validarPerguntas() {
     if (!informacaoValida) {
         alert("Por favor, preencha dos dados corretamente");
     }else {
+        perguntasGeradas = document.querySelectorAll(".pergunta");
         criarNiveis();
     }
 }
@@ -270,23 +273,85 @@ function criarNiveis() {
 
 function validarNiveis() {
     let informacaoValida = true;
-    let nivelSem0 = true;
-    const regex = /^#(?:[0-9a-fA-F]{3}){1,2}$/
+    let nivelCom0 = 0;
 
     document.querySelectorAll(".nivel").forEach((nivel) => {
         if (nivel.querySelector(".tituloNivel").value.length < 10) {informacaoValida = false};
         if (nivel.querySelector(".porcentagemAcerto").value < 0 || nivel.querySelector(".porcentagemAcerto").value > 100) {informacaoValida = false};
-        if (nivel.querySelector(".porcentagemAcerto").value == 0) {nivelSem0 =  false};
-        if (!regex.test(nivel.querySelector(".urlImagemNivel").value)) {informacaoValida = false};
+        if (nivel.querySelector(".porcentagemAcerto").value == 0) {nivelCom0++};
+        if (!verificaURL(nivel.querySelector(".urlImagemNivel").value)) {informacaoValida = false};
         if (nivel.querySelector(".descricaoNivel").value.length < 30) {informacaoValida = false};
     })
 
-    if (!informacaoValida || nivelSem0) {
+    if (!informacaoValida || nivelCom0 == 0) {
         alert("Por favor, preencha dos dados corretamente");
     }else {
-        console.log("Sucesso");
-        //criarNiveis();
+        niveisGerados = document.querySelectorAll(".nivel");
+        postQuizz();
     }
+}
+
+function postQuizz() {
+    
+    let quizz = [];
+    let questoesQuizz = [];
+    let niveisQuizz = [];
+
+    perguntasGeradas.forEach((pergunta) => {
+        let respostasIncorretas = pergunta.querySelectorAll(".respostaIncorreta")
+        let urlRespostasIncorretas = pergunta.querySelectorAll(".urlImagemRespostaIncorreta")
+        let respostas = [];
+
+        respostas.push({
+            text: pergunta.querySelector(".respostaCorreta").value,
+            image: pergunta.querySelector(".urlImagemRespostaCorreta").value,
+            isCorrectAnswer: true
+        })
+
+        for (let i = 0; i < 3; i++) {
+            if (!(respostasIncorretas[i].value.length === 0)) {
+                //(respostasIncorretas[i].value != null)
+                respostas.push({
+                    text: respostasIncorretas[i].value,
+                    image: urlRespostasIncorretas[i].value,
+                    isCorrectAnswer: false
+                })
+            }
+        }
+
+        let perguntaGerada =  {
+            title: pergunta.querySelector(".textoPergunta").value,
+            color: pergunta.querySelector(".corPergunta").value,
+            answers: respostas
+        }
+        questoesQuizz.push(perguntaGerada);
+    })
+    
+    niveisGerados.forEach((nivel) => {
+        niveisQuizz.push({
+			title: nivel.querySelector(".tituloNivel").value,
+			image: nivel.querySelector(".urlImagemNivel").value,
+			text: nivel.querySelector(".descricaoNivel").value,
+			minValue: nivel.querySelector(".porcentagemAcerto").value
+		})
+    })
+
+    quizz = {
+        title: informacoes[0].value,
+        image: informacoes[1].value,
+        questions: questoesQuizz,
+        levels: niveisQuizz
+    }
+
+    const promessa = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", quizz);
+        promessa.then(() =>{
+            //TODO
+            console.log("sucess");
+        })
+        promessa.catch((error) => {
+            console.log("Status code: " + error.response.status); 
+	        console.log("Mensagem de erro: " + error.response.data);
+        })
 }
 
 function verificaURL(string) {
