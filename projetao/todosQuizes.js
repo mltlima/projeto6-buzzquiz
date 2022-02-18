@@ -125,7 +125,7 @@ function printarResultado(){
             <p>${objeto.text}</p>
         </div>
         <button onclick="reiniciarQuiz()" class="reiniciarQuiz">Reiniciar Quizz</button>
-        <button onclick="voltarHome()" class="voltarHome">Voltar para home</button>
+        <button onclick="voltarHome('quizEspecifico')" class="voltarHome">Voltar para home</button>
     `
     setTimeout(()=>{document.querySelector('.resultadoQuiz').scrollIntoView()},2000)
 }
@@ -137,12 +137,12 @@ function reiniciarQuiz(){
     buscarQuizEspecifico(idQuiz)
     document.querySelector('.imagemTitulo').scrollIntoView()
 }
-function voltarHome(){
+function voltarHome(classeQueSome){
     gabarito=[]
     acertos=0
     niveis=[]
     idQuiz=0
-    document.querySelector('.quizEspecifico').classList.add('some')
+    document.querySelector(`.${classeQueSome}`).classList.add('some')
     document.querySelector('main').classList.remove('some')
     document.querySelector('main').scrollIntoView();
 }
@@ -150,9 +150,7 @@ function voltarHome(){
 
 function paginaCriacaoQuiz() {
     //Desabilita outras classes
-    document.querySelector('.todosQuizes').classList.add('some');
-    document.querySelector('.nenhumQuizCriado').classList.add('some');
-    document.querySelector('.meusQuizes').classList.add('some');
+    document.querySelector('main').classList.add('some');;
     //Habilita a classe de criacaoQuiz
     document.querySelector('.criacaoQuiz').classList.remove('some');
 }
