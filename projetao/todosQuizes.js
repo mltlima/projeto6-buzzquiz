@@ -6,6 +6,7 @@ let idQuiz=0
 let informacoes = [];
 let perguntasGeradas = [];
 let niveisGerados = [];
+let quizzesSalvos = [];
 function buscarQuizes(){
     const promessa= axios.get(url)
     promessa.then(separarListaObjetos)
@@ -142,6 +143,7 @@ function voltarHome(){
     acertos=0
     niveis=[]
     idQuiz=0
+    document.querySelector(".quizzPronto").classList.add("some");
     document.querySelector('.quizEspecifico').classList.add('some')
     document.querySelector('main').classList.remove('some')
     document.querySelector('main').scrollIntoView();
@@ -344,14 +346,23 @@ function postQuizz() {
     }
 
     const promessa = axios.post("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes", quizz);
-        promessa.then(() =>{
-            //TODO
-            console.log("sucess");
+        promessa.then((resposta) =>{
+            document.querySelector(".criacaoNiveis").classList.add("some");
+            const quizzPronto = document.querySelector(".quizzPronto");
+            quizzPronto.classList.remove("some");
+            quizzPronto.querySelector("img").src=`${informacoes[1].value}`;
+            console.log(resposta.data);
+            salvarQuizz(resposta.data);
         })
         promessa.catch((error) => {
             console.log("Status code: " + error.response.status); 
 	        console.log("Mensagem de erro: " + error.response.data);
         })
+}
+
+function salvarQuizz(quizz) {
+    quizzesSalvos.push(quizz);
+    localStorage.setItem("MeusQuizzes",JSON.stringify(quizzesSalvos));
 }
 
 function verificaURL(string) {

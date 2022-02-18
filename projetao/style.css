@@ -29,8 +29,8 @@ main{
 }
 section{
     width: 340px;
-    margin-top:34px
-    
+    margin-top:34px;
+
 }
 article{
     margin-top:69px;
@@ -201,17 +201,17 @@ h1{
 
 /* Criacao do quiz */
 
-.criacaoQuiz, .criacaoPerguntas, .criacaoNiveis{
+.criacaoQuiz, .criacaoPerguntas, .criacaoNiveis, .quizzPronto {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.criacaoQuiz h1, .criacaoPerguntas > h1:first-of-type, .criacaoNiveis > h1:first-of-type {
+.criacaoQuiz h1, .criacaoPerguntas > h1:first-of-type, .criacaoNiveis > h1:first-of-type, .quizzPronto {
     display:inline;
     width:100%;
     text-align:center;
  }
- .criacaoQuiz button,.criacaoPerguntas button, .criacaoNiveis button {
+ .criacaoQuiz button,.criacaoPerguntas button, .criacaoNiveis button, .quizzPronto button {
      box-sizing: content-box;
      height: 54px;
      width: 324px;
@@ -261,7 +261,22 @@ h1{
     margin-top: 9px ;
 }
 
-
+.voltarHomeButton {
+    background: none !important;
+    border: none !important;
+    color: black !important;
+}
+/*
+.quizzPronto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}*/
+.quizzPronto img {
+    width: 340px;
+    height: 181px;
+    margin: 20px;
+}
 
 /* AUXILIARES */
 
