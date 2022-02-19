@@ -196,7 +196,11 @@ function criarPerguntas() {
 
         criacaoPerguntasHTML.querySelector(".perguntas").innerHTML += 
         `
-        <section class="pergunta">
+        <div class="secoesEscondidas" onclick ="abrirSecao(this)" data-identifier="expand">
+            <h1>Pergunta ${i}</h1>
+            <ion-icon name="create-outline" ></ion-icon>
+        </div>
+        <section class="pergunta some">
             <h1>Pergunta ${i}</h1>
             <input class="textoPergunta" type="text" placeholder="Texto da pergunta">
             <input class="corPergunta" type="text" placeholder="Cor de fundo da pergunta">
@@ -218,6 +222,11 @@ function criarPerguntas() {
     }
 
 
+}
+
+function abrirSecao(secao) {
+    secao.classList.add("some");
+    secao.nextElementSibling.classList.remove("some");
 }
 
 function validarPerguntas() {
@@ -260,7 +269,11 @@ function criarNiveis() {
 
         criacaoNiveisHTML.querySelector(".niveis").innerHTML += 
         `
-        <section class="nivel">
+        <div class="secoesEscondidas" onclick ="abrirSecao(this)" data-identifier="expand">
+            <h1>Nível ${i}</h1>
+            <ion-icon name="create-outline" ></ion-icon>
+        </div>
+        <section class="nivel some">
             <h1>Nível ${i}</h1>
             <input class="tituloNivel" type="text" placeholder="Título do nível">
             <input class="porcentagemAcerto" type="number" placeholder="% de acerto mínima">
