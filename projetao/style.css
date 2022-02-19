@@ -9,7 +9,7 @@ body{
 header{
     width: 100%;
     height: 69px;
-    background-color: #EF5533;
+    background-color: #EC362D;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     position: fixed;top:0;
     display:flex;
@@ -289,31 +289,46 @@ h1{
     border: none !important;
     color: black !important;
 }
-/*
-.quizzPronto {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}*/
-
 .quizzPronto img {
     width: 100%; 
 }
 .imagemBox {
     width: 500px;
     position: relative;
-    background-color: #009C22;
 }
 .tituloImagem {
     position: absolute;
     left: 10px;
     bottom:10px;
 }
+.carregando {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+    background-color: white;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 29px;
+    color: #ec362d;
+}
+.carregando img {
+    height: 76px;
+    width: 76px;
+}
 
 /* Mobile */
 
 @media (max-width: 1100px) {
-    
+    .secoesEscondidas, .informacoesQuiz, .pergunta, .nivel {
+        width: 375px;
+    }
 }
 
 /* AUXILIARES */

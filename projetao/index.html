@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <header><span>BuzzQuizz</span></header>
+    <header><span onclick="adicionarTelaCarregando()">BuzzQuizz</span></header>
 
     
     <article class="quizEspecifico some">
@@ -81,6 +81,12 @@
             </ul>
         </section>
     </main>
+
+    <div class="carregando some">
+        <img src="loading.gif" alt="">
+        <p>Carregando</p>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="todosQuizes.js"></script>

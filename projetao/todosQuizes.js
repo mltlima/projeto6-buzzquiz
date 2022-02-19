@@ -202,20 +202,20 @@ function criarPerguntas() {
         </div>
         <section class="pergunta some">
             <h1>Pergunta ${i}</h1>
-            <input class="textoPergunta" type="text" placeholder="Texto da pergunta">
-            <input class="corPergunta" type="text" placeholder="Cor de fundo da pergunta">
+            <input class="textoPergunta" type="text" placeholder="Texto da pergunta" data-identifier="question">
+            <input class="corPergunta" type="text" placeholder="Cor de fundo da pergunta" data-identifier="question">
             <h1>Resposta correta</h1>
-            <input class="respostaCorreta" type="text" placeholder="Resposta Correta">
-            <input class="urlImagemRespostaCorreta" type="text" placeholder="URL da imagem">
+            <input class="respostaCorreta" type="text" placeholder="Resposta Correta" data-identifier="question">
+            <input class="urlImagemRespostaCorreta" type="text" placeholder="URL da imagem" data-identifier="question">
             <h1>Respostas incorretas</h1>
-            <input class="respostaIncorreta" type="text" placeholder="Resposta incorreta 1">
-            <input class="urlImagemRespostaIncorreta" type="text" placeholder="URL da imagem 1">
+            <input class="respostaIncorreta" type="text" placeholder="Resposta incorreta 1" data-identifier="question">
+            <input class="urlImagemRespostaIncorreta" type="text" placeholder="URL da imagem 1" data-identifier="question">
             <br>
-            <input class="respostaIncorreta" type="text" placeholder="Resposta incorreta 2">
-            <input class="urlImagemRespostaIncorreta" type="text" placeholder="URL da imagem 2">
+            <input class="respostaIncorreta" type="text" placeholder="Resposta incorreta 2" data-identifier="question">
+            <input class="urlImagemRespostaIncorreta" type="text" placeholder="URL da imagem 2" data-identifier="question">
             <br>
-            <input class="respostaIncorreta" type="text" placeholder="Resposta incorreta 3">
-            <input class="urlImagemRespostaIncorreta" type="text" placeholder="URL da imagem 3">
+            <input class="respostaIncorreta" type="text" placeholder="Resposta incorreta 3" data-identifier="question">
+            <input class="urlImagemRespostaIncorreta" type="text" placeholder="URL da imagem 3" data-identifier="question">
             <br>
         </section>
         `       
@@ -275,10 +275,10 @@ function criarNiveis() {
         </div>
         <section class="nivel some">
             <h1>Nível ${i}</h1>
-            <input class="tituloNivel" type="text" placeholder="Título do nível">
-            <input class="porcentagemAcerto" type="number" placeholder="% de acerto mínima">
-            <input class="urlImagemNivel" type="text" placeholder="URL da imagem do nível">
-            <input class="descricaoNivel" type="text" placeholder="Descrição do nível">
+            <input class="tituloNivel" type="text" placeholder="Título do nível" data-identifier="level">
+            <input class="porcentagemAcerto" type="number" placeholder="% de acerto mínima" data-identifier="level">
+            <input class="urlImagemNivel" type="text" placeholder="URL da imagem do nível" data-identifier="level">
+            <input class="descricaoNivel" type="text" placeholder="Descrição do nível" data-identifier="level">
         </section>
         `   
     }
@@ -300,6 +300,7 @@ function validarNiveis() {
         alert("Por favor, preencha dos dados corretamente");
     }else {
         niveisGerados = document.querySelectorAll(".nivel");
+        adicionarTelaCarregando();
         postQuizz();
     }
 }
@@ -382,6 +383,15 @@ function acessarQuizzCriado() {
     document.querySelector(".quizzPronto").classList.add("some");
     document.querySelector(".tela3").classList.add("some");
     buscarQuizEspecifico(quizzesSalvos[quizzesSalvos.length - 1])
+}
+
+function adicionarTelaCarregando() {
+    let telaCarregando = document.querySelector(".carregando");
+
+    telaCarregando.classList.remove("some");
+    setTimeout(() => {
+        telaCarregando.classList.add("some")
+    }, 3000)
 }
 
 
