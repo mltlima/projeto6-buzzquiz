@@ -3,6 +3,8 @@ body{
     background-color: #FAFAFA;
     font-size: 20px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
 }
 header{
     width: 100%;
@@ -201,6 +203,12 @@ h1{
 
 /* Criacao do quiz */
 
+.tela3 section {
+    margin: 100px 0px 0px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .criacaoQuiz, .criacaoPerguntas, .criacaoNiveis, .quizzPronto {
     display: flex;
     flex-direction: column;
@@ -228,7 +236,7 @@ h1{
      color: white;
  }
 .informacoesQuiz, .pergunta, .nivel {
-    max-width: 600px;
+    width: 600px;
     margin-top: 29px;
     display: flex;
     flex-direction: column;
@@ -241,6 +249,7 @@ h1{
     border-radius: 5px;
     color: #8d8c8c;
     height: 46px;
+    width: 100%;
     margin-top: 9px ;
 }
 .informacoesQuiz input::placeholder, .perguntas input::placeholder, .niveis input::placeholder {
@@ -260,7 +269,6 @@ h1{
     height: 340px !important;
     margin-top: 9px ;
 }
-
 .voltarHomeButton {
     background: none !important;
     border: none !important;
@@ -272,15 +280,24 @@ h1{
     flex-direction: column;
     justify-content: center;
 }*/
+
 .quizzPronto img {
-    width: 340px;
-    height: 181px;
-    margin: 20px;
+    width: 100%; 
+}
+.imagemBox {
+    width: 500px;
+    position: relative;
+    background-color: #009C22;
+}
+.tituloImagem {
+    position: absolute;
+    left: 10px;
+    bottom:10px;
 }
 
 /* AUXILIARES */
 
-.some{display:none}
+.some{display:none !important}
 
 .opacidade{opacity: 0.3;}
 

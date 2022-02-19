@@ -153,6 +153,7 @@ function paginaCriacaoQuiz() {
     //Desabilita outras classes
     document.querySelector('main').classList.add('some');;
     //Habilita a classe de criacaoQuiz
+    document.querySelector(".tela3").classList.remove("some");
     document.querySelector('.criacaoQuiz').classList.remove('some');
 }
 
@@ -348,8 +349,10 @@ function postQuizz() {
             const quizzPronto = document.querySelector(".quizzPronto");
             quizzPronto.classList.remove("some");
             quizzPronto.querySelector("img").src=`${informacoes[1].value}`;
-            console.log(resposta.data);
-            salvarQuizz(resposta.data);
+            quizzPronto.querySelector(".tituloImagem").innerHTML = informacoes[0].value;
+            console.log(resposta.data.id);
+            console.log(typeof resposta.data.id);
+            salvarQuizz(resposta.data.id);
         })
         promessa.catch((error) => {
             console.log("Status code: " + error.response.status); 
@@ -361,6 +364,13 @@ function salvarQuizz(quizz) {
     quizzesSalvos.push(quizz);
     localStorage.setItem("MeusQuizzes",JSON.stringify(quizzesSalvos));
 }
+
+function acessarQuizzCriado() {
+    document.querySelector(".quizzPronto").classList.add("some");
+    document.querySelector(".tela3").classList.add("some");
+    buscarQuizEspecifico(quizzesSalvos[quizzesSalvos.length - 1])
+}
+
 
 function verificaURL(string) {
     let url;
