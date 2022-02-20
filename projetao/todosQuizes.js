@@ -7,7 +7,6 @@ let informacoes = [];
 let perguntasGeradas = [];
 let niveisGerados = [];
 let quizzesSalvos = [];
-let quizesRecuperados=null;
 recuperarQuizesSalvos()
 function buscarQuizes(){
     const promessa= axios.get(url)
@@ -18,13 +17,14 @@ buscarQuizes()
 function recuperarQuizesSalvos(){
     jsonQuizes=window.localStorage.getItem("MeusQuizzes")
     const conversao=JSON.parse(jsonQuizes)
-    quizesRecuperados=conversao
+    quizzesSalvos=conversao
 }
 
 function separarListaObjetos(resposta){
     const lista=resposta.data
     lista.forEach((objeto)=>{
-        if(quizesRecuperados.includes(objeto.id)){
+        if(quizzesSalvos.includes(objeto.id)){
+            document.querySelector('.nenhumQuizCriado').classList.add('some');
             printarNosMeusQuizes(objeto.image,objeto.title,objeto.id)
         }else{
         printarTodosQuizes(objeto.image,objeto.title,objeto.id)}})
@@ -165,9 +165,10 @@ function voltarHome(classeQueSome){
     acertos=0
     niveis=[]
     idQuiz=0
-    document.querySelector(`.${classeQueSome}`).classList.add('some')
+    window.location.reload()
+    /*document.querySelector(`.${classeQueSome}`).classList.add('some')
     document.querySelector('main').classList.remove('some')
-    document.querySelector('main').scrollIntoView();
+    document.querySelector('main').scrollIntoView();*/
 }
 
 
