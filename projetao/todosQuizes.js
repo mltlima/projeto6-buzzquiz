@@ -7,15 +7,37 @@ let informacoes = [];
 let perguntasGeradas = [];
 let niveisGerados = [];
 let quizzesSalvos = [];
+let quizesRecuperados=null;
+recuperarQuizesSalvos()
 function buscarQuizes(){
     const promessa= axios.get(url)
     promessa.then(separarListaObjetos)
 }
 buscarQuizes()
 
+function recuperarQuizesSalvos(){
+    jsonQuizes=window.localStorage.getItem("MeusQuizzes")
+    const conversao=JSON.parse(jsonQuizes)
+    quizesRecuperados=conversao
+}
+
 function separarListaObjetos(resposta){
     const lista=resposta.data
-    lista.forEach((objeto)=>{printarTodosQuizes(objeto.image,objeto.title,objeto.id)})
+    lista.forEach((objeto)=>{
+        if(quizesRecuperados.includes(objeto.id)){
+            printarNosMeusQuizes(objeto.image,objeto.title,objeto.id)
+        }else{
+        printarTodosQuizes(objeto.image,objeto.title,objeto.id)}})
+}
+
+function printarNosMeusQuizes(imagem,titulo,id){
+    const listaTodos=document.querySelector('.meusQuizes ul')
+    listaTodos.innerHTML+=`
+    <li class="quiz" onclick="buscarQuizEspecifico('${id}')">
+        <img style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%), url(${imagem})">
+        <div><p>${titulo}</p></div>
+    </li>
+    `
 }
 
 function printarTodosQuizes(imagem,titulo,id){
