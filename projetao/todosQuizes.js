@@ -364,8 +364,7 @@ function postQuizz() {
             quizzPronto.classList.remove("some");
             quizzPronto.querySelector("img").src=`${informacoes[1].value}`;
             quizzPronto.querySelector(".tituloImagem").innerHTML = informacoes[0].value;
-            console.log(resposta.data.id);
-            console.log(typeof resposta.data.id);
+            document.querySelector('.nenhumQuizCriado').classList.remove('some');
             salvarQuizz(resposta.data.id);
         })
         promessa.catch((error) => {
@@ -387,7 +386,6 @@ function acessarQuizzCriado() {
 
 function adicionarTelaCarregando() {
     let telaCarregando = document.querySelector(".carregando");
-
     telaCarregando.classList.remove("some");
     setTimeout(() => {
         telaCarregando.classList.add("some")
