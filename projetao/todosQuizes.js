@@ -95,7 +95,7 @@ function printarQuiz(imagem,titulo,perguntas){
             respostas.innerHTML+=`
                 <div class="resposta perg${k}resp${i}" onclick="checarResposta(${k},${i},${listaRespostas.length})">
                     <img src="${listaRespostas[i].image}">
-                    <p>${listaRespostas[i].title}</p>
+                    <p>${listaRespostas[i].text}</p>
                 </div>
             `
             if(listaRespostas[i].isCorrectAnswer==true){
