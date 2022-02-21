@@ -259,7 +259,7 @@ h1{
     background-color: white;
     padding: 18px;
 }
-.informacoesQuiz input, .perguntas input, .niveis input {
+.informacoesQuiz input, .perguntas input, .niveis input, .niveis textarea {
     border: 1px solid #d1d1d1;
     border-radius: 5px;
     color: #8d8c8c;
@@ -267,7 +267,7 @@ h1{
     width: 100%;
     margin-top: 9px ;
 }
-.informacoesQuiz input::placeholder, .perguntas input::placeholder, .niveis input::placeholder {
+.informacoesQuiz input::placeholder, .perguntas input::placeholder, .niveis input::placeholder, .niveis textarea::placeholder {
     font-style: italic;
     font-weight: normal;
     font-size: 19px;

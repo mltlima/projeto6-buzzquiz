@@ -57,7 +57,6 @@ function buscarQuizEspecifico(id){
 
 function separarObjeto(resposta){
     const objeto=resposta.data
-    console.log(objeto) // RETIRAR DEPOIS 
     printarQuiz(objeto.image,objeto.title,objeto.questions)
     document.querySelector('main').classList.add('some')
     document.querySelector('.quizEspecifico').classList.remove('some')
@@ -160,15 +159,8 @@ function reiniciarQuiz(){
     buscarQuizEspecifico(idQuiz)
     document.querySelector('.imagemTitulo').scrollIntoView()
 }
-function voltarHome(classeQueSome){
-    gabarito=[]
-    acertos=0
-    niveis=[]
-    idQuiz=0
+function voltarHome(){
     window.location.reload()
-    /*document.querySelector(`.${classeQueSome}`).classList.add('some')
-    document.querySelector('main').classList.remove('some')
-    document.querySelector('main').scrollIntoView();*/
 }
 
 
@@ -300,8 +292,8 @@ function criarNiveis() {
             <h1>Nível ${i}</h1>
             <input class="tituloNivel" type="text" placeholder="Título do nível" data-identifier="level">
             <input class="porcentagemAcerto" type="number" placeholder="% de acerto mínima" data-identifier="level">
-            <input class="urlImagemNivel" type="text" placeholder="URL da imagem do nível" data-identifier="level">
-            <input class="descricaoNivel" type="text" placeholder="Descrição do nível" data-identifier="level">
+            <input class="urlImagemNivel" type="text" placeholder="URL da imagem do nível" data-identifier="level"> 
+            <textarea class="descricaoNivel" placeholder ="Descrição do nível"></textarea>
         </section>
         `   
     }
@@ -347,7 +339,6 @@ function postQuizz() {
 
         for (let i = 0; i < 3; i++) {
             if (!(respostasIncorretas[i].value.length === 0)) {
-                //(respostasIncorretas[i].value != null)
                 respostas.push({
                     text: respostasIncorretas[i].value,
                     image: urlRespostasIncorretas[i].value,
