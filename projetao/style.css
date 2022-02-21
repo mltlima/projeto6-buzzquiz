@@ -329,6 +329,26 @@ h1{
     .secoesEscondidas, .informacoesQuiz, .pergunta, .nivel {
         width: 375px;
     }
+    
+}
+@media (min-width:1100px){
+    section{width: 1051px;}
+    main ul{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .imagemTitulo{width: 100vw;}
+    .escurecedor{width: 100vw;}
+    .divPergunta{width: 759px;}
+    .tituloPergunta{height: 137px;width: 688px;}
+    .resposta{width: 329px;height: 225px;}
+    .resposta img{width: 329px;height: 175px;}
+    .respostas{width: 688px;}
+    .flexDesktop{display: flex;}
+    .flexDesktop div{margin:10px;width: 290px;height: 260px;display: flex;}
+
+    
 }
 
 /* AUXILIARES */

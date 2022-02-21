@@ -11,16 +11,22 @@ recuperarQuizesSalvos()
 function buscarQuizes(){
     const promessa= axios.get(url)
     promessa.then(separarListaObjetos)
+    if( quizzesSalvos.length>=1){
+        document.querySelector('.nenhumQuizCriado').add('some')
+        document.querySelector('.meusQuizes').remove('some')
+    }
 }
 buscarQuizes()
 
 function recuperarQuizesSalvos(){
     jsonQuizes=window.localStorage.getItem("MeusQuizzes")
     const conversao=JSON.parse(jsonQuizes)
-    quizzesSalvos=conversao
+    if(conversao!=null){
+    conversao.forEach((id)=>quizzesSalvos.push(id))}
 }
 
 function separarListaObjetos(resposta){
+    console.log(resposta.data)
     const lista=resposta.data
     lista.forEach((objeto)=>{
         if(quizzesSalvos.includes(objeto.id)){
@@ -144,8 +150,12 @@ function printarResultado(){
             <div class="tituloPergunta">
                 <span>${porcentagem}% de acerto: ${objeto.title}</span>
             </div>
+            <div class="flexDesktop">
             <img src="${objeto.image}">
+            <div>
             <p>${objeto.text}</p>
+            </div>
+            </div>
         </div>
         <button onclick="reiniciarQuiz()" class="reiniciarQuiz">Reiniciar Quizz</button>
         <button onclick="voltarHome('quizEspecifico')" class="voltarHome">Voltar para home</button>
