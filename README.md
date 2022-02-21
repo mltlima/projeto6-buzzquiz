@@ -1,6 +1,6 @@
 # projeto6-buzzquiz
 
-##Projeto 6 Driven
+## Projeto 6 Driven
 
 Alunos : Miguel Lima  
          Felipe Mejias
